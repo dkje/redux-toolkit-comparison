@@ -2,12 +2,13 @@ import {
   combineReducers,
   configureStore,
   createSlice,
+  getDefaultMiddleware,
   PayloadAction,
 } from "@reduxjs/toolkit";
 import thunk from "redux-thunk";
 import { v4 as uuid } from "uuid";
-import { todosReducer } from "./redux-org";
 import { Todo } from "./type";
+import logger from "redux-logger";
 
 const todosInitialState: Todo[] = [
   {
@@ -100,12 +101,6 @@ const counterSlice = createSlice({
   },
 });
 
-const reducer = {
-  todos: todosSlice.reducer,
-  counter: counterSlice.reducer,
-  selectedTodo: selectedTodoSlice.reducer,
-};
-
 //export action creator
 export const {
   create: createTodoActionCreator,
@@ -116,7 +111,15 @@ export const {
 
 export const { select: selectTodoActionCreator } = selectedTodoSlice.actions;
 
+const reducer = {
+  todos: todosSlice.reducer,
+  counter: counterSlice.reducer,
+  selectedTodo: selectedTodoSlice.reducer,
+};
+
 export default configureStore({
   reducer,
-  middleware: [thunk],
+  middleware: [...getDefaultMiddleware(), logger], //middleware가 덮어씌워지지 않게 기존 것과 합친다
+  // devTools: true //default
+  devTools: process.env.NODE_ENV !== "production",
 });

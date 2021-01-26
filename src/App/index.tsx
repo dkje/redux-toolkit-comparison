@@ -7,7 +7,8 @@ import React, {
 } from "react";
 import { State } from "../type";
 import {useDispatch,useSelector} from 'react-redux';
-import {createTodoActionCreator, editTodoActionCreator, toggleTodoActionCreator, deleteTodoActionCreator, selectTodoActionCreator} from '../redux-org';
+// import {createTodoActionCreator, editTodoActionCreator, toggleTodoActionCreator, deleteTodoActionCreator, selectTodoActionCreator} from '../redux-org';
+import {createTodoActionCreator, editTodoActionCreator, toggleTodoActionCreator, deleteTodoActionCreator, selectTodoActionCreator} from '../redux-toolkit';
 import "./App.css";
 
 const App = function() {
